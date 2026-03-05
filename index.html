@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Kreidler Nielsen — Freelance Servicetekniker</title>
+    <meta name="description" content="Freelance servicetekniker med speciale i reparation og vedligehold af erhvervsmaskiner. Servicerer udlejningsvirksomheder i hele Danmark.">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-dark: #1a1a2e;
+            --color-darker: #12121f;
+            --color-accent: #e86a2a;
+            --color-accent-hover: #d45a1a;
+            --color-light: #f0f0f0;
+            --color-muted: #a0a0b0;
+            --color-card: #22223a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: var(--color-darker);
+            color: var(--color-light);
+            line-height: 1.6;
+            user-select: none;
+            cursor: default;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 31, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--color-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-light);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background:
+                linear-gradient(to bottom, rgba(18, 18, 31, 0.6), rgba(18, 18, 31, 1)),
+                url('billede.jpg') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--color-accent);
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--color-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            background: var(--color-accent);
+            color: #fff;
+            padding: 0.85rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .hero .cta:hover {
+            background: var(--color-accent-hover);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-light);
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+            margin-top: 0.5rem;
+        }
+
+        /* ABOUT */
+        .about-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 2rem;
+        }
+
+        .about-photo {
+            width: 250px;
+            height: 300px;
+            background: var(--color-card);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-muted);
+            font-size: 0.85rem;
+            overflow: hidden;
+        }
+
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text p {
+            color: var(--color-muted);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        /* SERVICES */
+        #ydelser {
+            background: var(--color-dark);
+            border-radius: 12px;
+            padding: 4rem 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--color-card);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--color-muted);
+        }
+
+        /* CLIENTS */
+        .clients {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .clients p {
+            color: var(--color-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .client-logos span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-muted);
+            opacity: 0.6;
+            letter-spacing: 0.05em;
+            user-select: none;
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--color-card);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .contact-item h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-item a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--color-muted);
+            color: var(--color-muted);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .contact-item a:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-item p {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--color-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--color-card);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #ydelser {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav ul {
+                gap: 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">SKN</a>
+    <ul>
+        <li><a href="#om">Om mig</a></li>
+        <li><a href="#ydelser">Ydelser</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <h1>Simon <span>Kreidler Nielsen</span></h1>
+        <p class="tagline">Freelance servicetekniker — reparation og vedligehold af erhvervsmaskiner</p>
+        <a href="#kontakt" class="cta">Kontakt mig</a>
+    </div>
+</header>
+
+<section id="om">
+    <h2>Om mig</h2>
+    <div class="about-content">
+        <div class="about-photo">
+            <!-- Erstat med rigtigt billede: <img src="billede.jpg" alt="Simon Kreidler Nielsen"> -->
+            Billede kommer
+        </div>
+        <div class="about-text">
+            <p>Jeg er freelance servicetekniker med speciale i erhvervsmaskiner. Jeg servicerer nogle af Danmarks største udlejningsvirksomheder og sørger for, at deres maskinpark kører som den skal.</p>
+            <p>Min hverdag handler om fejlfinding, reparation og forebyggende vedligehold af alt fra plæneklippere og betonblandere til større entreprenørmaskiner. Jeg kommer til jer — uanset hvor i landet opgaven er.</p>
+            <p>Kvalitet, pålidelighed og hurtig responstid er det, jeg bygger mit arbejde på.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ydelser">
+    <h2>Ydelser</h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">&#128295;</div>
+            <h3>Reparation</h3>
+            <p>Hurtig og effektiv reparation af defekte maskiner, så nedetiden minimeres.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#128269;</div>
+            <h3>Fejlfinding</h3>
+            <p>Systematisk diagnosticering af mekaniske og elektriske fejl.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#9881;&#65039;</div>
+            <h3>Vedligehold</h3>
+            <p>Forebyggende service der forlænger maskinernes levetid og reducerer nedbrud.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#128666;</div>
+            <h3>Mobil service</h3>
+            <p>Jeg kommer til jer. Service og reparation on-site i hele Danmark.</p>
+        </div>
+    </div>
+
+    <div class="clients">
+        <p>Jeg samarbejder med</p>
+        <div class="client-logos">
+            <span>STARK</span>
+            <span>BAUHAUS</span>
+        </div>
+    </div>
+</section>
+
+<section id="kontakt">
+    <h2>Kontakt</h2>
+    <div class="contact-grid">
+        <div class="contact-item">
+            <h3>Telefon</h3>
+            <div class="contact-row">
+                <a href="tel:+4512345678">+45 12 34 56 78</a>
+                <button class="copy-btn" onclick="copyText('+45 12 34 56 78', this)">Kopier</button>
+            </div>
+            <p>Hverdage 07:00–17:00</p>
+        </div>
+        <div class="contact-item">
+            <h3>Email</h3>
+            <div class="contact-row">
+                <a href="mailto:kreidlernielsen@gmail.com">kreidlernielsen@gmail.com</a>
+                <button class="copy-btn" onclick="copyText('kreidlernielsen@gmail.com', this)">Kopier</button>
+            </div>
+            <p>Svar inden for 24 timer</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Simon Kreidler Nielsen — Freelance Servicetekniker. CVR: 12345678</p>
+</footer>
+
+<script>
+function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Kopieret!';
+        setTimeout(function() { btn.textContent = 'Kopier'; }, 2000);
+    });
+}
+</script>
+</body>
+</html>
