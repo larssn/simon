@@ -222,28 +222,47 @@
         .clients {
             text-align: center;
             margin-top: 3rem;
+            background: var(--color-darker);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
         }
 
         .clients p {
-            color: var(--color-muted);
+            color: var(--color-accent);
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
         }
 
         .client-logos {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .client-logos span {
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: var(--color-muted);
-            opacity: 0.6;
-            letter-spacing: 0.05em;
+            color: var(--color-light);
+            opacity: 0.7;
+            letter-spacing: 0.12em;
             user-select: none;
+            transition: all 0.25s;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 0.6rem 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .client-logos span:hover {
+            opacity: 1;
+            border-color: var(--color-accent);
+            background: rgba(232, 106, 42, 0.08);
         }
 
         /* CONTACT */
