@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simon Kreidler Nielsen — Freelance Servicetekniker</title>
-    <meta name="description" content="Freelance servicetekniker med speciale i reparation og vedligehold af erhvervsmaskiner. Servicerer udlejningsvirksomheder i hele Danmark.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+    <title>Roucon Teknik ApS — Reparation og vedligehold af erhvervsmaskiner</title>
+    <meta name="description" content="Roucon Teknik ApS i Brabrand. Reparation, fejlfinding og vedligehold af erhvervsmaskiner for udlejningsvirksomheder i hele Danmark.">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -31,8 +32,6 @@
             background: var(--color-darker);
             color: var(--color-light);
             line-height: 1.6;
-            user-select: none;
-            cursor: default;
         }
 
         /* NAV */
@@ -218,53 +217,6 @@
             color: var(--color-muted);
         }
 
-        /* CLIENTS */
-        .clients {
-            text-align: center;
-            margin-top: 3rem;
-            background: var(--color-darker);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            padding: 2.5rem 2rem;
-        }
-
-        .clients p {
-            color: var(--color-accent);
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 600;
-        }
-
-        .client-logos {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .client-logos span {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--color-light);
-            opacity: 0.7;
-            letter-spacing: 0.12em;
-            user-select: none;
-            transition: all 0.25s;
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 0.6rem 1.8rem;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .client-logos span:hover {
-            opacity: 1;
-            border-color: var(--color-accent);
-            background: rgba(232, 106, 42, 0.08);
-        }
-
         /* CONTACT */
         .contact-grid {
             display: grid;
@@ -371,33 +323,35 @@
 <body>
 
 <nav>
-    <a href="#" class="logo">SKN</a>
+    <a href="#" class="logo">ROUCON TEKNIK</a>
     <ul>
-        <li><a href="#om">Om mig</a></li>
+        <li><a href="#om">Om os</a></li>
         <li><a href="#ydelser">Ydelser</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
     </ul>
 </nav>
 
+<main>
+
 <header class="hero">
     <div class="hero-content">
-        <h1>Simon <span>Kreidler Nielsen</span></h1>
-        <p class="tagline">Freelance servicetekniker — reparation og vedligehold af erhvervsmaskiner</p>
-        <a href="#kontakt" class="cta">Kontakt mig</a>
+        <h1>Roucon <span>Teknik</span></h1>
+        <p class="tagline">Reparation og vedligehold af erhvervsmaskiner — i hele Danmark</p>
+        <a href="#kontakt" class="cta">Kontakt os</a>
     </div>
 </header>
 
 <section id="om">
-    <h2>Om mig</h2>
+    <h2>Om os</h2>
     <div class="about-content">
         <div class="about-photo">
-            <!-- Erstat med rigtigt billede: <img src="billede.jpg" alt="Simon Kreidler Nielsen"> -->
+            <!-- Erstat med rigtigt billede: <img src="billede.jpg" alt="Roucon Teknik ApS"> -->
             Billede kommer
         </div>
         <div class="about-text">
-            <p>Jeg er freelance servicetekniker med speciale i erhvervsmaskiner. Jeg servicerer nogle af Danmarks største udlejningsvirksomheder og sørger for, at deres maskinpark kører som den skal.</p>
-            <p>Min hverdag handler om fejlfinding, reparation og forebyggende vedligehold af alt fra plæneklippere og betonblandere til større entreprenørmaskiner. Jeg kommer til jer — uanset hvor i landet opgaven er.</p>
-            <p>Kvalitet, pålidelighed og hurtig responstid er det, jeg bygger mit arbejde på.</p>
+            <p>Roucon Teknik ApS er specialiseret i service af erhvervsmaskiner. Vi servicerer nogle af Danmarks største udlejningsvirksomheder og sørger for, at deres maskinpark kører som den skal.</p>
+            <p>Vores hverdag handler om fejlfinding, reparation og forebyggende vedligehold af alt fra plæneklippere og betonblandere til større entreprenørmaskiner. Vi kommer til jer — uanset hvor i landet opgaven er.</p>
+            <p>Kvalitet, pålidelighed og hurtig responstid er det, vi bygger vores arbejde på.</p>
         </div>
     </div>
 </section>
@@ -423,16 +377,10 @@
         <div class="service-card">
             <div class="service-icon">&#128666;</div>
             <h3>Mobil service</h3>
-            <p>Jeg kommer til jer. Service og reparation on-site i hele Danmark.</p>
+            <p>Vi kommer til jer. Service og reparation on-site i hele Danmark.</p>
         </div>
     </div>
 
-    <div class="clients">
-        <p>Jeg samarbejder med</p>
-        <div class="client-logos">
-            <span>STARK</span>
-            <span>BAUHAUS</span>
-        </div>
     </div>
 </section>
 
@@ -442,24 +390,26 @@
         <div class="contact-item">
             <h3>Telefon</h3>
             <div class="contact-row">
-                <a href="tel:+4512345678">+45 12 34 56 78</a>
-                <button class="copy-btn" onclick="copyText('+45 12 34 56 78', this)">Kopier</button>
+                <a href="tel:+4522321229">+45 22 32 12 29</a>
+                <button class="copy-btn" aria-label="Kopier telefonnummer" onclick="copyText('+45 22 32 12 29', this)">Kopier</button>
             </div>
             <p>Hverdage 07:00–17:00</p>
         </div>
         <div class="contact-item">
             <h3>Email</h3>
             <div class="contact-row">
-                <a href="mailto:kreidlernielsen@gmail.com">kreidlernielsen@gmail.com</a>
-                <button class="copy-btn" onclick="copyText('kreidlernielsen@gmail.com', this)">Kopier</button>
+                <a href="mailto:info@roucon.dk">info@roucon.dk</a>
+                <button class="copy-btn" aria-label="Kopier emailadresse" onclick="copyText('info@roucon.dk', this)">Kopier</button>
             </div>
             <p>Svar inden for 24 timer</p>
         </div>
     </div>
 </section>
 
+</main>
+
 <footer>
-    <p>&copy; 2026 Simon Kreidler Nielsen — Freelance Servicetekniker. CVR: 12345678</p>
+    <p>&copy; 2026 Roucon Teknik ApS — Skovbakkevej 21, 1. 17, 8220 Brabrand. CVR: 45963705</p>
 </footer>
 
 <script>
