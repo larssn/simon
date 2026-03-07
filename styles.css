@@ -323,30 +323,6 @@ nav {
     font-weight: 600;
 }
 
-/* === PARTNER BADGE (upclimber) === */
-.partner-badge {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-}
-
-.partner-badge-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-}
-
-.partner-badge img {
-    width: 120px;
-    height: auto;
-    mix-blend-mode: multiply;
-    opacity: 0.85;
-    filter: brightness(1.8) contrast(0.9);
-}
-
 /* === SECTION SHARED === */
 section {
     padding: 100px 2rem;
@@ -400,15 +376,6 @@ section::after {
     max-width: 600px;
     font-size: 1.05rem;
     line-height: 1.7;
-}
-
-.section-cta {
-    margin-top: 2.5rem;
-}
-
-/* === ALT BACKGROUND === */
-.alt-bg {
-    background: var(--bg-card);
 }
 
 /* === OM OS (index) === */
@@ -604,66 +571,6 @@ section::after {
     color: var(--accent-bright);
 }
 
-/* === HIGHLIGHT CARDS (upclimber) === */
-.highlights {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 3rem;
-}
-
-.highlight-card {
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    padding: 1.75rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.alt-bg .highlight-card {
-    background: var(--bg-elevated);
-}
-
-.highlight-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent);
-}
-
-.highlight-title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-}
-
-.highlight-card p {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-}
-
-.highlights-grid .highlight-card {
-    background: var(--bg-card);
-}
-
-.alt-bg .highlights-grid .highlight-card {
-    background: var(--bg-elevated);
-}
-
 /* === KONTAKT === */
 .contact {
     background: var(--bg-card);
@@ -852,45 +759,6 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-}
-
-.uc-hero-partner {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 0.5rem 1.25rem 0.5rem 0.5rem;
-    border-radius: 50px;
-}
-
-.uc-hero-partner-logo {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.uc-hero-partner-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.uc-hero-partner-name {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    line-height: 1.2;
-}
-
-.uc-hero-partner-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
 }
 
 .uc-hero h1 {
@@ -1125,8 +993,7 @@ footer {
         gap: 2.5rem;
     }
 
-    .services-grid,
-    .highlights-grid {
+    .services-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1141,10 +1008,6 @@ footer {
     .uc-hero-inner {
         grid-template-columns: 1fr;
         text-align: center;
-    }
-
-    .uc-hero-partner {
-        justify-content: center;
     }
 
     .uc-hero-desc {
@@ -1248,10 +1111,6 @@ footer {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
-    }
-
-    .uc-hero-partner {
-        justify-content: center;
     }
 
     .uc-hero-desc {
