@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roucon Teknik ApS — Maskinreparation i hele Danmark</title>
+    <meta name="description" content="Roucon Teknik ApS — Mobil maskinreparation, fejlfinding og vedligehold af erhvervsmaskiner i hele Danmark. Ring +45 22 32 12 29.">
+    <meta property="og:title" content="Roucon Teknik ApS">
+    <meta property="og:description" content="Professionel reparation og vedligehold af erhvervsmaskiner. Mobil service i hele Danmark.">
+    <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
-    <title>Roucon Teknik ApS — Reparation og vedligehold af erhvervsmaskiner</title>
-    <meta name="description" content="Roucon Teknik ApS i Brabrand. Reparation, fejlfinding og vedligehold af erhvervsmaskiner for udlejningsvirksomheder i hele Danmark.">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -14,13 +17,16 @@
         }
 
         :root {
-            --color-dark: #1a1a2e;
-            --color-darker: #12121f;
-            --color-accent: #e86a2a;
-            --color-accent-hover: #d45a1a;
-            --color-light: #f0f0f0;
-            --color-muted: #a0a0b0;
-            --color-card: #22223a;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --accent: #e8700a;
+            --accent-bright: #ff8c1a;
+            --text-primary: #f0ece6;
+            --text-secondary: #a09a94;
+            --text-muted: #8a8580;
+            --border: #2a2520;
+            --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         html {
@@ -28,397 +34,917 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-            background: var(--color-darker);
-            color: var(--color-light);
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* NAV */
+        /* === NOISE TEXTURE OVERLAY === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* === NAVIGATION === */
         nav {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(18, 18, 31, 0.95);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
         }
 
-        nav .logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--color-accent);
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-primary);
             text-decoration: none;
         }
 
-        nav ul {
-            list-style: none;
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
             display: flex;
             gap: 2rem;
+            list-style: none;
         }
 
-        nav a {
-            color: var(--color-muted);
+        .nav-links a {
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--color-light);
+        .nav-links a:hover {
+            color: var(--accent-bright);
         }
 
-        /* HERO */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 6px 0;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* === HERO === */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            background:
-                linear-gradient(to bottom, rgba(18, 18, 31, 0.6), rgba(18, 18, 31, 1)),
-                url('billede.jpg') center/cover no-repeat;
-        }
-
-        .hero-content {
-            max-width: 700px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero h1 span {
-            color: var(--color-accent);
-        }
-
-        .hero .tagline {
-            font-size: 1.25rem;
-            color: var(--color-muted);
-            margin-bottom: 2rem;
-        }
-
-        .hero .cta {
-            display: inline-block;
-            background: var(--color-accent);
-            color: #fff;
-            padding: 0.85rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .hero .cta:hover {
-            background: var(--color-accent-hover);
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--color-light);
-        }
-
-        section h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--color-accent);
-            margin-top: 0.5rem;
-        }
-
-        /* ABOUT */
-        .about-content {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 3rem;
-            align-items: start;
-            margin-top: 2rem;
-        }
-
-        .about-photo {
-            width: 250px;
-            height: 300px;
-            background: var(--color-card);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-muted);
-            font-size: 0.85rem;
+            position: relative;
+            padding: 120px 2rem 80px;
             overflow: hidden;
         }
 
-        .about-photo img {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(232, 112, 10, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
-        .about-text p {
-            color: var(--color-muted);
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
-        }
-
-        /* SERVICES */
-        #ydelser {
-            background: var(--color-dark);
-            border-radius: 12px;
-            padding: 4rem 3rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .service-card {
-            background: var(--color-card);
-            border-radius: 8px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .service-card p {
-            font-size: 0.9rem;
-            color: var(--color-muted);
-        }
-
-        /* CONTACT */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            background: var(--color-card);
-            border-radius: 8px;
-            padding: 2rem;
-        }
-
-        .contact-item h3 {
-            font-size: 0.85rem;
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-accent);
-            margin-bottom: 0.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
         }
 
-        .contact-row {
+        .hero-tag::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .hero h1 .line-accent {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 112, 10, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-bright);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        /* === SECTION SHARED === */
+        section {
+            padding: 100px 2rem;
+            position: relative;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
 
-        .contact-item a {
-            color: var(--color-light);
-            text-decoration: none;
-            font-size: 1.2rem;
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* === OM OS === */
+        .about {
+            background: var(--bg-card);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .about-text strong {
+            color: var(--text-primary);
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-highlight {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-highlight::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+        }
+
+        .about-highlight-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-highlight p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* === YDELSER === */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--bg-elevated);
+            line-height: 1;
+            margin-bottom: 1rem;
+            -webkit-text-stroke: 1px var(--border);
+        }
+
+        .service-card:hover .service-number {
+            -webkit-text-stroke: 1px var(--accent);
+            color: rgba(232, 112, 10, 0.05);
+        }
+
+        .service-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .service-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* === KONTAKT === */
+        .contact {
+            background: var(--bg-card);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item-value {
+            color: var(--text-primary);
+            font-size: 1rem;
             font-weight: 600;
-            cursor: pointer;
+        }
+
+        .contact-item-value a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item-value a:hover {
+            color: var(--accent-bright);
         }
 
         .copy-btn {
-            background: transparent;
-            border: 1px solid var(--color-muted);
-            color: var(--color-muted);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.6rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
             cursor: pointer;
-            transition: all 0.2s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            transition: all 0.3s;
         }
 
         .copy-btn:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .contact-item a:hover {
-            color: var(--color-accent);
+        .copy-btn.copied {
+            border-color: #4caf50;
+            color: #4caf50;
         }
 
-        .contact-item p {
-            color: var(--color-muted);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
+        .contact-cta {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* FOOTER */
+        .contact-cta h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .contact-cta p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .contact-cta .btn {
+            align-self: flex-start;
+        }
+
+        /* === FOOTER === */
         footer {
-            text-align: center;
             padding: 3rem 2rem;
-            color: var(--color-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--color-card);
+            border-top: 1px solid var(--border);
+            background: var(--bg-dark);
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-            .about-content {
-                grid-template-columns: 1fr;
-                justify-items: center;
-            }
+        .footer-brand {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
 
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-info a:hover {
+            color: var(--accent);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .about-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
-            #ydelser {
-                padding: 3rem 1.5rem;
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 2rem;
             }
         }
 
-        @media (max-width: 480px) {
-            nav {
-                padding: 0.75rem 1rem;
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.97);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
             }
 
-            nav ul {
-                gap: 0.75rem;
-                font-size: 0.8rem;
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 1.5rem 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 70px 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.75rem;
+            }
+
+            .service-number {
+                font-size: 3rem;
+            }
+
+            .contact-cta {
+                padding: 1.75rem;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="#" class="logo">ROUCON TEKNIK</a>
-    <ul>
-        <li><a href="#om">Om os</a></li>
-        <li><a href="#ydelser">Ydelser</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-    </ul>
-</nav>
-
-<main>
-
-<header class="hero">
-    <div class="hero-content">
-        <h1>Roucon <span>Teknik</span></h1>
-        <p class="tagline">Reparation og vedligehold af erhvervsmaskiner — i hele Danmark</p>
-        <a href="#kontakt" class="cta">Kontakt os</a>
-    </div>
-</header>
-
-<section id="om">
-    <h2>Om os</h2>
-    <div class="about-content">
-        <div class="about-photo">
-            <!-- Erstat med rigtigt billede: <img src="billede.jpg" alt="Roucon Teknik ApS"> -->
-            Billede kommer
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">ROUCON <span>TEKNIK</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#om-os">Om os</a></li>
+                <li><a href="#ydelser">Ydelser</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <div class="about-text">
-            <p>Roucon Teknik ApS er specialiseret i service af erhvervsmaskiner. Vi servicerer nogle af Danmarks største udlejningsvirksomheder og sørger for, at deres maskinpark kører som den skal.</p>
-            <p>Vores hverdag handler om fejlfinding, reparation og forebyggende vedligehold af alt fra plæneklippere og betonblandere til større entreprenørmaskiner. Vi kommer til jer — uanset hvor i landet opgaven er.</p>
-            <p>Kvalitet, pålidelighed og hurtig responstid er det, vi bygger vores arbejde på.</p>
-        </div>
-    </div>
-</section>
+    </nav>
 
-<section id="ydelser">
-    <h2>Ydelser</h2>
-    <div class="services-grid">
-        <div class="service-card">
-            <div class="service-icon">&#128295;</div>
-            <h3>Reparation</h3>
-            <p>Hurtig og effektiv reparation af defekte maskiner, så nedetiden minimeres.</p>
-        </div>
-        <div class="service-card">
-            <div class="service-icon">&#128269;</div>
-            <h3>Fejlfinding</h3>
-            <p>Systematisk diagnosticering af mekaniske og elektriske fejl.</p>
-        </div>
-        <div class="service-card">
-            <div class="service-icon">&#9881;&#65039;</div>
-            <h3>Vedligehold</h3>
-            <p>Forebyggende service der forlænger maskinernes levetid og reducerer nedbrud.</p>
-        </div>
-        <div class="service-card">
-            <div class="service-icon">&#128666;</div>
-            <h3>Mobil service</h3>
-            <p>Vi kommer til jer. Service og reparation on-site i hele Danmark.</p>
-        </div>
-    </div>
+    <main>
 
-    </div>
-</section>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-tag">Maskinreparation i hele Danmark</div>
+                <h1>
+                    Vi holder dine
+                    <span class="line-accent">maskiner kørende.</span>
+                </h1>
+                <p class="hero-desc">
+                    Roucon Teknik ApS er din partner inden for reparation, fejlfinding, vedligehold
+                    og mobil service af erhvervsmaskiner. Vi kommer til dig — uanset hvor i Danmark du befinder dig.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="tel:+4522321229" class="btn btn-primary">Ring nu — 22 32 12 29</a>
+                    <a href="#ydelser" class="btn btn-outline">Se vores ydelser</a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <span class="hero-stat-number">Mobil</span>
+                        <span class="hero-stat-label">Vi kommer til dig</span>
+                    </div>
+                    <div>
+                        <span class="hero-stat-number">Hele DK</span>
+                        <span class="hero-stat-label">Landsdækkende</span>
+                    </div>
+                    <div>
+                        <span class="hero-stat-number">Hurtigt</span>
+                        <span class="hero-stat-label">Kort responstid</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="kontakt">
-    <h2>Kontakt</h2>
-    <div class="contact-grid">
-        <div class="contact-item">
-            <h3>Telefon</h3>
-            <div class="contact-row">
+        <!-- OM OS -->
+        <section class="about" id="om-os">
+            <div class="section-inner">
+                <div class="section-label">Om os</div>
+                <h2 class="section-title">Bygget på erfaring.<br>Drevet af handling.</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>
+                            <strong>Roucon Teknik ApS</strong> er grundlagt af <strong>Simon Kreidler Nielsen</strong>
+                            med en simpel vision: levere pålidelig maskinservice, der holder erhvervsmaskiner i drift
+                            og minimerer nedetid for vores kunder.
+                        </p>
+                        <p>
+                            Vi servicerer alt fra plæneklippere og cementblandere til tungt entreprenørmateriel.
+                            Vores kunder tæller store danske udlejningsvirksomheder som <strong>Stark</strong> og
+                            <strong>Bauhaus</strong>, der stoler på os til at holde deres maskinpark kørende.
+                        </p>
+                        <p>
+                            Når din maskine er nede, er vi på vej.
+                        </p>
+                    </div>
+                    <div class="about-highlights">
+                        <div class="about-highlight">
+                            <div class="about-highlight-title">Mobil service</div>
+                            <p>Vi kommer til dig med fuldt udrustet servicevogn. Ingen opgave er for langt væk.</p>
+                        </div>
+                        <div class="about-highlight">
+                            <div class="about-highlight-title">Erhvervsfokus</div>
+                            <p>Vi forstår at nedetid koster penge. Derfor prioriterer vi hurtige løsninger der holder.</p>
+                        </div>
+                        <div class="about-highlight">
+                            <div class="about-highlight-title">Betroet af de store</div>
+                            <p>Stark, Bauhaus og andre store danske udlejere vælger Roucon Teknik som deres servicepartner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YDELSER -->
+        <section id="ydelser">
+            <div class="section-inner">
+                <div class="section-label">Ydelser</div>
+                <h2 class="section-title">Hvad vi gør — og gør godt.</h2>
+                <p class="section-desc">
+                    Fra akut reparation til forebyggende vedligehold. Vi tilbyder den komplette løsning
+                    til virksomheder, der er afhængige af deres maskiner.
+                </p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-number">01</div>
+                        <h3 class="service-title">Reparation</h3>
+                        <p class="service-desc">
+                            Hurtig og effektiv reparation der minimerer din nedetid. Vi diagnosticerer
+                            fejlen, skaffer dele og får din maskine op at køre igen — så hurtigt som muligt.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">02</div>
+                        <h3 class="service-title">Fejlfinding</h3>
+                        <p class="service-desc">
+                            Systematisk diagnosticering af mekaniske og elektriske fejl. Vi finder roden
+                            til problemet, så du ikke ender med den samme fejl igen og igen.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">03</div>
+                        <h3 class="service-title">Vedligehold</h3>
+                        <p class="service-desc">
+                            Forebyggende service der forlænger dine maskiners levetid og reducerer risikoen
+                            for uplanlagte nedbrud. En investering der betaler sig selv hjem.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">04</div>
+                        <h3 class="service-title">Mobil service</h3>
+                        <p class="service-desc">
+                            Vi kommer til dig — direkte på din lokation. Vores fuldt udstyrede servicevogn
+                            gør det muligt at udføre reparationer på stedet, uden transport af maskinen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KONTAKT -->
+        <section class="contact" id="kontakt">
+            <div class="section-inner">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Lad os tale om din opgave.</h2>
+                <p class="section-desc">
+                    Ring, skriv eller kig forbi. Vi er klar til at hjælpe dig med at holde dine maskiner i drift.
+                </p>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">&#9742;</div>
+                            <div>
+                                <div class="contact-item-label">Telefon</div>
+                                <div class="contact-item-value">
+                                    <a href="tel:+4522321229">+45 22 32 12 29</a>
+                                    <button class="copy-btn" aria-label="Kopier telefonnummer" onclick="copyText('+45 22 32 12 29', this)">Kopier</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">&#9993;</div>
+                            <div>
+                                <div class="contact-item-label">Email</div>
+                                <div class="contact-item-value">
+                                    <a href="mailto:info@roucon.dk">info@roucon.dk</a>
+                                    <button class="copy-btn" aria-label="Kopier emailadresse" onclick="copyText('info@roucon.dk', this)">Kopier</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">&#9873;</div>
+                            <div>
+                                <div class="contact-item-label">Adresse</div>
+                                <div class="contact-item-value">Skovbakkevej 21, 1. 17<br>8220 Brabrand</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">&#9881;</div>
+                            <div>
+                                <div class="contact-item-label">CVR</div>
+                                <div class="contact-item-value">45963705</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-cta">
+                        <h3>Maskinen er nede?</h3>
+                        <p>
+                            Ring til os nu, og vi finder den hurtigste løsning. Vi står klar med det
+                            rigtige udstyr til at løse dit problem på stedet.
+                        </p>
+                        <a href="tel:+4522321229" class="btn btn-primary">Ring +45 22 32 12 29</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">Roucon<span>.</span> Teknik ApS</div>
+            <div class="footer-info">
+                <span>CVR: 45963705</span>
+                <span>Skovbakkevej 21, 1. 17, 8220 Brabrand</span>
                 <a href="tel:+4522321229">+45 22 32 12 29</a>
-                <button class="copy-btn" aria-label="Kopier telefonnummer" onclick="copyText('+45 22 32 12 29', this)">Kopier</button>
-            </div>
-            <p>Hverdage 07:00–17:00</p>
-        </div>
-        <div class="contact-item">
-            <h3>Email</h3>
-            <div class="contact-row">
                 <a href="mailto:info@roucon.dk">info@roucon.dk</a>
-                <button class="copy-btn" aria-label="Kopier emailadresse" onclick="copyText('info@roucon.dk', this)">Kopier</button>
             </div>
-            <p>Svar inden for 24 timer</p>
         </div>
-    </div>
-</section>
+    </footer>
 
-</main>
+    <script>
+        // Mobile nav toggle
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.getElementById('navLinks').classList.toggle('active');
+            this.classList.toggle('active');
+        });
 
-<footer>
-    <p>&copy; 2026 Roucon Teknik ApS — Skovbakkevej 21, 1. 17, 8220 Brabrand. CVR: 45963705</p>
-</footer>
+        // Close mobile nav on link click
+        document.querySelectorAll('#navLinks a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('navLinks').classList.remove('active');
+                document.getElementById('navToggle').classList.remove('active');
+            });
+        });
 
-<script>
-function copyText(text, btn) {
-    navigator.clipboard.writeText(text).then(function() {
-        btn.textContent = 'Kopieret!';
-        setTimeout(function() { btn.textContent = 'Kopier'; }, 2000);
-    });
-}
-</script>
+        // Copy to clipboard
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(function () {
+                btn.classList.add('copied');
+                btn.textContent = 'Kopieret!';
+                setTimeout(function () {
+                    btn.classList.remove('copied');
+                    btn.textContent = 'Kopier';
+                }, 2000);
+            });
+        }
+    </script>
+
 </body>
 </html>
