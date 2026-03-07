@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s https://starkearvid.com/wp-content/themes/starkearvid/css/main.min.css)",
+      "Bash(tr '}' '\\\\n')",
+      "Bash(curl -s -I \"https://starkearvid.com/wp-content/uploads/2025/10/Starke-arvid-produkt-upclimber-832x440-1.png\")",
+      "Bash(curl -s https://starkearvid.com/produkter/upclimber/)"
+    ]
+  }
+}
